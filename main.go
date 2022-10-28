@@ -19,6 +19,7 @@ func main() {
 	router.HandleFunc("/getGameData", handlers.GetGameData(newGame)).Methods("GET")
 	router.HandleFunc("/newPlayer", handlers.NewPlayer(newGame)).Methods("POST")
 	router.HandleFunc("/processRequest", handlers.ProcessRequest(newGame)).Methods("POST")
+	router.HandleFunc("/processAdminRequest", handlers.ProcessAdminRequest(newGame)).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 

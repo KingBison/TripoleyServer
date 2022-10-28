@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"tripoley-server/models"
 )
@@ -15,6 +16,7 @@ func GetGameData(game *models.GameData) http.HandlerFunc {
 			return
 		}
 		updateGameData(game)
+		fmt.Println(game)
 		w.Write(G)
 	}
 }

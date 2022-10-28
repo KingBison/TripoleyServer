@@ -8,7 +8,7 @@ import (
 	"tripoley-server/models"
 )
 
-func ProcessRequest(game *models.GameData) http.HandlerFunc {
+func ProcessAdminRequest(game *models.GameData) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		reqData, err := ioutil.ReadAll(r.Body)
 		if err != nil {
@@ -18,19 +18,17 @@ func ProcessRequest(game *models.GameData) http.HandlerFunc {
 		}
 		var req models.GameRequest
 		err = json.Unmarshal(reqData, &req)
-		player := helpers.GetPlayer(game, req.Name)
-		if player.Name == "" {
+		if err != nil {
 			w.WriteHeader(500)
-			w.Write([]byte("Player Not Found"))
+			w.Write([]byte("Error Unmarshaling Body"))
 			return
 		}
-		res := helpers.ProcessRequest(game, player, req)
+		res := helpers.ProcessAdminRequest(game, req)
 		if res {
 			w.WriteHeader(201)
 		} else {
 			w.WriteHeader(400)
 			w.Write([]byte("request-refused"))
 		}
-
 	}
 }
