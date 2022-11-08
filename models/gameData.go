@@ -1,8 +1,10 @@
 package models
 
 type GameData struct {
-	Players     []Player
-	GameRunning bool
-	NeedToDeal  bool
-	PokerWinner Player
+	Players        []Player
+	GameRunning    bool
+	GameState      string
+	BiddingPointer Player
+	PokerWinner    Player
+	PokerStart     Player
 }

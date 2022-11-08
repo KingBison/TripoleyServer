@@ -13,7 +13,7 @@ func main() {
 	newGame := &models.GameData{
 		Players:     []models.Player{},
 		GameRunning: false,
-		NeedToDeal:  false,
+		GameState:   "deal",
 	}
 	router := mux.NewRouter()
 	router.HandleFunc("/health", handlers.HealthHandler(newGame)).Methods("GET")

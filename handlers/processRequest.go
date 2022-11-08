@@ -24,7 +24,8 @@ func ProcessRequest(game *models.GameData) http.HandlerFunc {
 			w.Write([]byte("Player Not Found"))
 			return
 		}
-		res := helpers.ProcessRequest(game, player, req)
+		params := r.URL.Query()
+		res := helpers.ProcessRequest(game, player, req, params)
 		if res {
 			w.WriteHeader(201)
 		} else {
